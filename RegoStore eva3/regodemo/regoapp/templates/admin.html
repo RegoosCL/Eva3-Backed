@@ -1,0 +1,46 @@
+{% extends 'navadmin.html' %}
+
+{% block content %}
+
+    
+        <div class="container mt-5">
+            <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+                <div class="col-md-8">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-header">
+                            <h4 class="mb-0">Bienvenido, {{ user.username }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="lead">Desde aquí puedes gestionar los productos, usuarios y más.</p>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a href="#" class="btn btn-secondary btn-block">Gestionar Productos</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#" class="btn btn-secondary btn-block">Gestionar Carrito</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#" class="btn btn-secondary btn-block">Ver Mensajes de Contacto</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#" class="btn btn-secondary btn-block">Ver Perfiles de Usuarios</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+{% endblock %}
