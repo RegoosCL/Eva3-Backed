@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Detalle de Boleta #{{ boleta.id }}</h2>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Información de la Compra</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Fecha:</strong> {{ boleta.fecha_compra|date:"d/m/Y H:i" }}</p>
+            <p><strong>Cliente:</strong> {{ boleta.usuario.username }}</p>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detalle in boleta.detalles.all %}
+                <tr>
+                    <td>{{ detalle.producto.name }}</td>
+                    <td>{{ detalle.cantidad }}</td>
+                    <td>${{ detalle.precio_unitario|floatformat:2 }}</td>
+                    <td>${{ detalle.subtotal|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>Subtotal:</strong></td>
+                    <td>${{ boleta.subtotal|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>IVA (19%):</strong></td>
+                    <td>${{ boleta.iva|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                    <td>${{ boleta.total|floatformat:2 }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+{% endblock %}
